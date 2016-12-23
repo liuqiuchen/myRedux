@@ -25,6 +25,8 @@ searchDir.forEach(function(dir){
       if(fs.existsSync(reduxfile)){
         entry[dir+'/'+file + '/redux'] = reduxfile;
       }
+
+      // 配置less的入口文件
     }
 
   });
