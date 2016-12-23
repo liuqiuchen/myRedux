@@ -1,13 +1,27 @@
-import lightStore from '../../stores/light/'
-import {changeGreen, changeYellow, changeRed } from '../../actions/light/'
+import React, {PropTypes, Component} from 'react';
+import {render} from 'react-dom';
+import classnames from 'classnames';
+import './index.less';
 
-let store = lightStore();
+// es6方式编写一个react组件
+class Light extends Component {
+	render () {
+		let color = this.props.light.color;
+		return (
+			<div className="traffic-light">
+				<span className={classnames('light', color)}/>
+			</div>
+			)
+	}
+}
 
-// store.subscribe() 注册监听器
-let unsubscribe = store.subscribe(() => console.log(store.getState()));
+Light.propTypes = {
+	light: PropTypes.object.isRequired
+};
 
-store.dispatch(changeGreen());
-store.dispatch(changeYellow());
-store.dispatch(changeRed());
+// 没什么意义
+Light.defaultProps = {
+	light: {color: 'red', time: '4'}
+};
 
-
+export default Light;
