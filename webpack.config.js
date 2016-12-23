@@ -9,19 +9,22 @@ var entry = {};
 
 searchDir.forEach(function(dir){
   var srcBasePath = path.join(__dirname, './', dir);
+  // 读取目录
   var files = fs.readdirSync(srcBasePath);
   var ignore = ['.DS_Store']; // 忽略某些文件夹
   files.map(function (file) {
-
+    
     if (ignore.indexOf(file) < 0) {
       entry[dir+'/'+file] = path.join(srcBasePath, file, 'index.js');
 
       var demofile = path.join(srcBasePath, file, 'demo.js');
+      // 判断文件是否存在
       if(fs.existsSync(demofile)){
         entry[dir+'/'+file + '/demo'] = demofile;
       }
 
       var reduxfile = path.join(srcBasePath, file, 'redux.js');
+      // 判断文件是否存在
       if(fs.existsSync(reduxfile)){
         entry[dir+'/'+file + '/redux'] = reduxfile;
       }
